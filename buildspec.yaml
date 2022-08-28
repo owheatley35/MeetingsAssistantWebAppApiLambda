@@ -7,7 +7,6 @@ phases:
     commands:
       - echo "Installing Dependencies..."
       - pip install -r src/requirements.txt
-      - sudo apt-get install zip
   build:
     commands:
       - zip -r lambda_function.zip src
