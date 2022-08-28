@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo "Installing Dependencies..."
+      - pip install -r src/requirements.txt
+      - sudo apt-get install zip
+  build:
+    commands:
+      - zip -r lambda_function.zip src
+      - mkdir build
+      - cp lambda_function.zip build
+
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: build
