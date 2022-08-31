@@ -9,12 +9,8 @@ phases:
       - pip install -r requirements.txt
   build:
     commands:
-      - zip lambda_function.zip *
-      - mkdir build
-      - cp lambda_function.zip build
+      - zip lambda_function *
 
 artifacts:
   files:
-    - "**/*"
-  discard-paths: no
-  base-directory: build
+    - lambda_function.zip
