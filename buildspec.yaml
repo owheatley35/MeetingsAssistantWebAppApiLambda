@@ -6,7 +6,7 @@ phases:
       python: 3.9
     commands:
       - echo "Installing Dependencies..."
-      - pip install -r src/requirements.txt
+      - pip install -r requirements.txt
   build:
     commands:
       - zip -r lambda_function.zip .
