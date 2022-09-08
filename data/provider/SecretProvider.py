@@ -35,7 +35,7 @@ class SecretProvider:
                 SecretId=secret_name
             )
             self._logger.info("Secret Retrieved")
-            return json.loads(secret)
+            return json.loads(secret['SecretString'])
         except Exception as e:
             self._logger.error("Failed to retrieve secret.")
             self._logger.error(e)
