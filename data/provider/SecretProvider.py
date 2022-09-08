@@ -1,6 +1,4 @@
 import json
-from logging import Logger
-from boto3 import Session
 from helper.BotoHelper import global_boto_session
 
 import Constants

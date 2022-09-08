@@ -3,7 +3,6 @@ import sys
 from data.provider.SecretProvider import SecretProvider
 from database.DBConfiguration import DBConfiguration
 from helper.LoggingHelper import LoggingHelper
-from security.credentials import host, db_username, db_password, port, db_host
 import os
 
 
@@ -27,10 +26,11 @@ class DBConfigurationProvider:
         self._db_username = db_credentials['username']
         self._db_password = db_credentials['password']
         self._database_identifier = db_credentials['dbInstanceIdentifier']
+        self._db_port = db_credentials['port']
         logger.info("Data Access Complete.")
 
     def get_configuration(self) -> DBConfiguration:
         """
         :return: DBConfiguration object containing all the information required to create a connection to a database.
         """
-        return DBConfiguration(self._host, self._db_username, self._db_password, port, self._database_identifier)
+        return DBConfiguration(self._host, self._db_username, self._db_password, self._db_port, self._database_identifier)

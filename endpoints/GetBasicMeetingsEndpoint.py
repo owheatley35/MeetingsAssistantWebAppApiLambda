@@ -1,4 +1,3 @@
-import logging
 from typing import List
 
 from data.provider.meeting.BasicMeetingProvider import BasicMeetingProvider

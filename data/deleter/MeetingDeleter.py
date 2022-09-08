@@ -1,5 +1,3 @@
-import logging
-
 from data.MeetingDataManipulator import MeetingDataManipulator
 from database.MySQLQueryExecutor import MySQLQueryExecutor
 from helper.LoggingHelper import LoggingHelper

@@ -1,5 +1,4 @@
 import datetime
-import logging
 
 from data.MeetingDataManipulator import MeetingDataManipulator
 from data.model.meeting.Meeting import Meeting

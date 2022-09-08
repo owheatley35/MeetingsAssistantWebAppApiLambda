@@ -1,5 +1,3 @@
-import logging
-
 from data.provider.meeting.MeetingProvider import MeetingProvider
 from helper.JSONHelper import convert_custom_object_to_dict
 from helper.LoggingHelper import LoggingHelper

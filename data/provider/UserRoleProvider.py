@@ -1,5 +1,3 @@
-import logging
-
 from data.DatabaseConnector import DatabaseConnector
 from database.MySQLQueryExecutor import MySQLQueryExecutor
 from helper.LoggingHelper import LoggingHelper

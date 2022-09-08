@@ -1,5 +1,3 @@
-import logging
-
 from data.provider.DBConfigurationProvider import DBConfigurationProvider
 from mysql.connector import connect
 
