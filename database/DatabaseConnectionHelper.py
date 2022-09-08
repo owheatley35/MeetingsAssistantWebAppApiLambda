@@ -1,6 +1,5 @@
 from data.provider.DBConfigurationProvider import DBConfigurationProvider
-from mysql.connector import connect
-
+import pymysql
 from helper.LoggingHelper import LoggingHelper
 
 
@@ -19,6 +18,7 @@ class DatabaseConnectionHelper:
         self._configuration = configuration
         self._connection = self._establish_connection()
         self._logger.info("MySQL DB Connection Established")
+        self._is_connected = False
 
     def get_connection_cursor(self):
         """
@@ -44,7 +44,7 @@ class DatabaseConnectionHelper:
         :return: None
         """
 
-        if self._connection.is_connected():
+        if self._is_connected:
             self._connection.close()
             self._logger.info("DB Connection Closed Successfully")
 
@@ -54,7 +54,7 @@ class DatabaseConnectionHelper:
 
         :return: boolean whether a connection is active
         """
-        return self._connection.is_connected()
+        return self._is_connected
 
     def _establish_connection(self):
         """
@@ -62,9 +62,21 @@ class DatabaseConnectionHelper:
 
         :return: Connection to MySQL database
         """
-        return connect(
-            user=self._configuration.get_db_username(),
-            password=self._configuration.get_db_password(),
-            host=self._configuration.get_db_host(),
-            port=self._configuration.get_port(),
-        )
+        self._logger.info("Opening Connection")
+
+        try:
+            conn = pymysql.connect(
+                host=self._configuration.get_db_host(),
+                user=self._configuration.get_db_username(),
+                passwd=self._configuration.get_db_password(),
+                db=self._configuration.get_db_name(),
+                connect_timeout=self._configuration.get_db_connection_timeout()
+            )
+            self._is_connected = True
+            self._logger.info("Connection Opened")
+            return conn
+        except pymysql.MySQLError as e:
+            self._is_connected = False
+            self._logger.error("Connection Failed" + str(e))
+            return
+
