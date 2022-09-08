@@ -14,7 +14,7 @@ class DBConfigurationProvider:
     def __init__(self, secrets_provider=SecretProvider(), logger=LoggingHelper(__name__).retrieve_logger()):
         try:
             logger.info("Retrieving env data")
-            db_credentials_secret_name = os.environ['databaseInformationSecretName...']
+            db_credentials_secret_name = os.environ['databaseInformationSecretName']
             logger.info("Retrieving Secret Value...")
             db_credentials = secrets_provider.retrieve_secret(db_credentials_secret_name)
         except Exception as e:
