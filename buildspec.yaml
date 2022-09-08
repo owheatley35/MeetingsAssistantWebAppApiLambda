@@ -9,7 +9,7 @@ phases:
       - pip install --target . -r requirements.txt
   build:
     commands:
-      - zip lambda_function *
+      - zip -r lambda_function *
 
 artifacts:
   files:
