@@ -18,7 +18,7 @@ class DBConfiguration:
         self._db_password = db_password
         self._port = db_port
         self._db_name = db_name
-        self._db_connection_timeout = 30
+        self._db_connection_timeout = 35
 
     def get_db_host(self) -> str:
         return self._host

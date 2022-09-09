@@ -71,6 +71,7 @@ class DatabaseConnectionHelper:
                 passwd=self._configuration.get_db_password(),
                 database=self._configuration.get_db_name(),
                 port=self._configuration.get_port(),
+                connect_timeout=self._configuration.get_db_connection_timeout()
             )
             self._is_connected = True
             self._logger.info("Connection Opened")
