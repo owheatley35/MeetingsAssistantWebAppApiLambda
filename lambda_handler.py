@@ -26,6 +26,9 @@ def handle(context, event):
         query_helper.execute_query(initial_sql_setup)
         query_helper.execute_query(update_with_inital_user)
 
+    connection_helper.commit_connection()
+    connection_helper.close_connection()
+
 
     retrieve_rows = UserRoleProvider('621694e858c5f70069b7cb06')
     print(retrieve_rows.get_user_role())
