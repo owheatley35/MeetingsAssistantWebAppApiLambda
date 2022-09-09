@@ -4,7 +4,7 @@ class DBConfiguration:
     """
 
     def __init__(self, db_host: str, db_username: str, db_password: str,
-                 db_port: str, db_name: str):
+                 db_port: int, db_name: str):
         """
         :param db_host: string containing the host for the database
         :param db_username: username for the database
@@ -18,7 +18,7 @@ class DBConfiguration:
         self._db_password = db_password
         self._port = db_port
         self._db_name = db_name
-        self._db_connection_timeout = 5
+        self._db_connection_timeout = 30
 
     def get_db_host(self) -> str:
         return self._host
@@ -29,7 +29,7 @@ class DBConfiguration:
     def get_db_password(self) -> str:
         return self._db_password
 
-    def get_port(self) -> str:
+    def get_port(self) -> int:
         return self._port
 
     def get_db_name(self) -> str:

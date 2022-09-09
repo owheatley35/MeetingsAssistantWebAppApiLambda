@@ -26,7 +26,7 @@ class DBConfigurationProvider:
         self._db_username = db_credentials['username']
         self._db_password = db_credentials['password']
         self._database_identifier = db_credentials['dbInstanceIdentifier']
-        self._db_port = db_credentials['port']
+        self._db_port = int(db_credentials['port'])
         logger.info("Data Access Complete.")
 
     def get_configuration(self) -> DBConfiguration:
