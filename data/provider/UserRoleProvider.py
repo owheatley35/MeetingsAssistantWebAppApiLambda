@@ -3,7 +3,7 @@ from database.MySQLQueryExecutor import MySQLQueryExecutor
 from helper.LoggingHelper import LoggingHelper
 from helper.SQLValidationHelper import validate_user_id
 
-SQL_QUERY = "SELECT RoleName FROM MeetingsAssistantInitial.users WHERE UserId = %(user_id)s"
+SQL_QUERY = "SELECT RoleName FROM meetingsassistant.users WHERE UserId = %(user_id)s"
 
 
 class UserRoleProvider(DatabaseConnector):
