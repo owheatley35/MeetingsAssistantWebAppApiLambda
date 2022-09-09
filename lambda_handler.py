@@ -25,6 +25,7 @@ def handle(context, event):
 
     if connection_helper.is_connection_open():
         query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+        query_helper.execute_query(create_db_beta)
         query_helper.execute_query(initial_sql_setup)
         query_helper.execute_query(update_with_inital_user)
 
