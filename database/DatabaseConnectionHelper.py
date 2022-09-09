@@ -69,7 +69,7 @@ class DatabaseConnectionHelper:
                 host=self._configuration.get_db_host(),
                 user=self._configuration.get_db_username(),
                 passwd=self._configuration.get_db_password(),
-                database=self._configuration.get_db_name(),
+                # database=self._configuration.get_db_name(),
                 port=self._configuration.get_port(),
                 connect_timeout=self._configuration.get_db_connection_timeout()
             )
