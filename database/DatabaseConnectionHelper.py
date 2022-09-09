@@ -15,10 +15,10 @@ class DatabaseConnectionHelper:
         :param configuration: DBConfiguration Details
         """
         self._logger = logger
+        self._is_connected = False
         self._configuration = configuration
         self._connection = self._establish_connection()
         self._logger.info("MySQL DB Connection Established")
-        self._is_connected = False
 
     def get_connection_cursor(self):
         """
