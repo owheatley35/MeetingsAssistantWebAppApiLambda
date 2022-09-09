@@ -1,4 +1,7 @@
+from data.provider.DBConfigurationProvider import DBConfigurationProvider
 from data.provider.UserRoleProvider import UserRoleProvider
+from database.DatabaseConnectionHelper import DatabaseConnectionHelper
+from database.MySQLQueryExecutor import MySQLQueryExecutor
 
 
 def handle(context, event):
@@ -14,6 +17,15 @@ def handle(context, event):
     select_tables = """SELECT * FROM betameetingsassistant.users"""
 
     # db_connection = DatabaseConnectionHelper()
+
+    db_config = DBConfigurationProvider().get_configuration()
+    connection_helper = DatabaseConnectionHelper(db_config)
+
+    if connection_helper.is_connection_open():
+        query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+        query_helper.execute_query(initial_sql_setup)
+        query_helper.execute_query(update_with_inital_user)
+
 
     retrieve_rows = UserRoleProvider('621694e858c5f70069b7cb06')
     print(retrieve_rows.get_user_role())
