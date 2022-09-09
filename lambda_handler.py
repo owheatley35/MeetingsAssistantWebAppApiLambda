@@ -7,31 +7,30 @@ from database.MySQLQueryExecutor import MySQLQueryExecutor
 def handle(context, event):
     print("Handling From")
 
-    create_db_beta = """CREATE DATABASE meetingsassistant"""
-
-    initial_sql_setup = """CREATE TABLE meetingsassistant.users (
-    UserId varchar(255) PRIMARY KEY NOT NULL,
-    RoleName varchar(255) NOT NULL);"""
-
-    update_with_inital_user = """INSERT into meetingsassistant.users (UserId, RoleName)
-    VALUES ('621694e858c5f70069b7cb06', 'role:admin');"""
-
-    select_tables = """SELECT * FROM meetingsassistant.users"""
-
-    # db_connection = DatabaseConnectionHelper()
-
-    db_config = DBConfigurationProvider().get_configuration()
-    connection_helper = DatabaseConnectionHelper(db_config)
-
-    if connection_helper.is_connection_open():
-        query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
-        query_helper.execute_query(create_db_beta)
-        query_helper.execute_query(initial_sql_setup)
-        query_helper.execute_query(update_with_inital_user)
-
-    connection_helper.commit_connection()
-    connection_helper.close_connection()
-
+    # create_db_beta = """CREATE DATABASE meetingsassistant"""
+    #
+    # initial_sql_setup = """CREATE TABLE meetingsassistant.users (
+    # UserId varchar(255) PRIMARY KEY NOT NULL,
+    # RoleName varchar(255) NOT NULL);"""
+    #
+    # update_with_inital_user = """INSERT into meetingsassistant.users (UserId, RoleName)
+    # VALUES ('621694e858c5f70069b7cb06', 'role:admin');"""
+    #
+    # select_tables = """SELECT * FROM meetingsassistant.users"""
+    #
+    # # db_connection = DatabaseConnectionHelper()
+    #
+    # db_config = DBConfigurationProvider().get_configuration()
+    # connection_helper = DatabaseConnectionHelper(db_config)
+    #
+    # if connection_helper.is_connection_open():
+    #     query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+    #     query_helper.execute_query(create_db_beta)
+    #     query_helper.execute_query(initial_sql_setup)
+    #     query_helper.execute_query(update_with_inital_user)
+    #
+    # connection_helper.commit_connection()
+    # connection_helper.close_connection()
 
     retrieve_rows = UserRoleProvider('621694e858c5f70069b7cb06')
     print(retrieve_rows.get_user_role())
