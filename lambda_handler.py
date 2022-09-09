@@ -9,13 +9,13 @@ def handle(context, event):
     RoleName varchar(255) NOT NULL);"""
 
     update_with_inital_user = """INSERT into betameetingsassistant.users (UserId, RoleName)
-    VALUES ('auth0|621694e858c5f70069b7cb06', 'role:admin');"""
+    VALUES ('621694e858c5f70069b7cb06', 'role:admin');"""
 
     select_tables = """SELECT * FROM betameetingsassistant.users"""
 
     # db_connection = DatabaseConnectionHelper()
 
-    retrieve_rows = UserRoleProvider('auth0|621694e858c5f70069b7cb06')
+    retrieve_rows = UserRoleProvider('621694e858c5f70069b7cb06')
     print(retrieve_rows.get_user_role())
 
     return {
