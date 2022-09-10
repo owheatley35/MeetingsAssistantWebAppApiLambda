@@ -1,5 +1,3 @@
-from pymysql.cursors import Cursor
-
 from helper.LoggingHelper import LoggingHelper
 
 
@@ -12,7 +10,7 @@ class MySQLQueryExecutor:
         """
         :param cursor: A cursor object, should be created from the DatabaseConnectionHelper
         """
-        self._cursor: Cursor = cursor
+        self._cursor = cursor
         self._logger = logger
 
     def execute_query(self, query: str, parameters={}):
@@ -42,4 +40,5 @@ class MySQLQueryExecutor:
         for row in self._cursor:
             rows.append(row)
 
+        self._cursor.reset()
         return rows

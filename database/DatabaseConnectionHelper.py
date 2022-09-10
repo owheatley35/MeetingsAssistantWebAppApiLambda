@@ -1,6 +1,7 @@
 from data.provider.DBConfigurationProvider import DBConfigurationProvider
 import pymysql
 from helper.LoggingHelper import LoggingHelper
+from mysql.connector import connect
 
 
 class DatabaseConnectionHelper:
@@ -65,13 +66,18 @@ class DatabaseConnectionHelper:
         self._logger.info("Opening Connection")
 
         try:
-            conn = pymysql.connect(
-                host=self._configuration.get_db_host(),
+            # conn = pymysql.connect(
+            #     host=self._configuration.get_db_host(),
+            #     user=self._configuration.get_db_username(),
+            #     passwd=self._configuration.get_db_password(),
+            #     port=self._configuration.get_port(),
+            #     connect_timeout=self._configuration.get_db_connection_timeout()
+            # )
+            conn = connect(
                 user=self._configuration.get_db_username(),
-                passwd=self._configuration.get_db_password(),
-                # database=self._configuration.get_db_name(),
+                password=self._configuration.get_db_password(),
+                host=self._configuration.get_db_host(),
                 port=self._configuration.get_port(),
-                connect_timeout=self._configuration.get_db_connection_timeout()
             )
             self._is_connected = True
             self._logger.info("Connection Opened")

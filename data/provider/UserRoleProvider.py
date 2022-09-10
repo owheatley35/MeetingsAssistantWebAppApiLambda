@@ -63,6 +63,7 @@ class UserRoleProvider(DatabaseConnector):
                 return rows_returned[0][0]
 
             self._logger.warning("Query Returned NO Results")
+            return ""
 
         self._logger.error("Database not Queried due to one of the following being 'flase': \n "
                            "Connection Open: %s \n Parameters Valid: %s",
