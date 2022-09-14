@@ -19,15 +19,19 @@ def handle(context, event):
 
     # create_db_beta = """CREATE DATABASE meetingsassistant"""
     #
-    # initial_sql_setup = """CREATE TABLE meetingsassistant.users (
-    # UserId varchar(255) PRIMARY KEY NOT NULL,
-    # RoleName varchar(255) NOT NULL);"""
+    initial_sql_setup = """CREATE TABLE meetingsassistant.meetings (
+    UserId varchar(255) PRIMARY KEY NOT NULL,
+    MeetingDateTime DATETIME NOT NULL,
+    NumberOfAttendees INT NOT NULL,
+    MeetingNotes LONGTEXT,
+    MeetingTitle TEXT NOT NULL,
+    Attendees LONGTEXT NOT NULL);"""
     #
-    update_with_inital_user = """INSERT into meetingsassistant.users (UserId, RoleName)
-    VALUES ('624c0fe938bf3900699ac5cc', 'role:admin');"""
-
-    update_with_user = """INSERT into meetingsassistant.users (UserId, RoleName)
-        VALUES ('624c117bb407b20069e31c01', 'role:standard');"""
+    # update_with_inital_user = """INSERT into meetingsassistant.users (UserId, RoleName)
+    # VALUES ('624c0fe938bf3900699ac5cc', 'role:admin');"""
+    #
+    # update_with_user = """INSERT into meetingsassistant.users (UserId, RoleName)
+    #     VALUES ('624c117bb407b20069e31c01', 'role:standard');"""
 
     # select_tables = """SELECT * FROM meetingsassistant.users"""
 
@@ -40,8 +44,7 @@ def handle(context, event):
         query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
         # query_helper.execute_query(create_db_beta)
         # query_helper.execute_query(initial_sql_setup)
-        query_helper.execute_query(update_with_inital_user)
-        query_helper.execute_query(update_with_user)
+        query_helper.execute_query(initial_sql_setup)
 
     connection_helper.commit_connection()
     connection_helper.close_connection()
