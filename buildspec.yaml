@@ -9,6 +9,8 @@ phases:
       - pip install --target . -r requirements.txt
   build:
     commands:
+      - echo "Running Tests..."
+      - pytest
       - zip -r lambda_function *
 
 artifacts:
