@@ -10,9 +10,6 @@ phases:
   build:
     commands:
       - echo "Running Tests..."
-      - python -m pytest
-  post_build:
-    commands:
       - zip -r lambda_function *
 
 artifacts:
