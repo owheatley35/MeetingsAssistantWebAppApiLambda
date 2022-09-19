@@ -1,5 +1,3 @@
-from data.provider.DBConfigurationProvider import DBConfigurationProvider
-import pymysql
 from helper.LoggingHelper import LoggingHelper
 from mysql.connector import connect
 
@@ -82,7 +80,7 @@ class DatabaseConnectionHelper:
             self._is_connected = True
             self._logger.info("Connection Opened")
             return conn
-        except pymysql.MySQLError as e:
+        except Exception as e:
             self._is_connected = False
             self._logger.error("Connection Failed" + str(e))
             return
