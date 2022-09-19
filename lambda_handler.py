@@ -57,14 +57,14 @@ def handle(event, context):
         lambda_event = LambdaEvent(event)
     except InvalidHeaderException as e:
         logger.error("Invalid event: " + str(e))
-        return SetResponses.INVALID_REQUEST
+        return SetResponses.INVALID_REQUEST.value
 
     # Authenticate User
     try:
         user = UserAuthorizer(lambda_event.get_header()).authorise_user()
     except AuthError as e:
         logger.error(e)
-        return SetResponses.UNAUTHENTICATED
+        return SetResponses.UNAUTHENTICATED.value
 
     # Route request to desired endpoint
     endpoint_executor = EndpointExecutor(user, lambda_event.get_query_parameters())
