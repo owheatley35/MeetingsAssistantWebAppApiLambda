@@ -3,7 +3,7 @@ from database.MySQLQueryExecutor import MySQLQueryExecutor
 from helper.LoggingHelper import LoggingHelper
 from helper.SQLValidationHelper import validate_user_id, validate_meeting_id, validate_input_string
 
-SQL_QUERY = """UPDATE MeetingsAssistantInitial.meetings
+SQL_QUERY = """UPDATE meetingsassistant.meetings
 SET MeetingNotes = %(new_note)s
 WHERE UserId = %(user_id)s AND MeetingId = %(meeting_id)s;"""
 

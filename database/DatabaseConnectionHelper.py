@@ -9,7 +9,7 @@ class DatabaseConnectionHelper:
     Class to create and manage the SSH Tunnel and MySLQ DB connection.
     """
 
-    def __init__(self, configuration=DBConfigurationProvider().get_configuration(), logger=LoggingHelper(__name__).retrieve_logger()):
+    def __init__(self, configuration, logger=LoggingHelper(__name__).retrieve_logger()):
         """
         Establishes a DB Connection to RDS
 

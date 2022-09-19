@@ -34,18 +34,20 @@ class CreateMeetingEndpoint:
         self._endpoint_status: bool = True
         self._meeting_creator = MeetingCreator(self._user_id, self._meeting_title, self._meeting_transcript, self._meeting_date_time, self._attendees)
 
-    def create_meeting(self) -> None:
+    def create_meeting(self) -> [bool, bool]:
         """
         Calls the creator class to create the meeting when the endpoint is open.
 
-        :return: None
+        :return: boolean whether it was successful
         """
         if self._endpoint_status:
             self._logger.info("Creating Endpoint")
-            self._meeting_creator.send_meeting()
+            is_success, params_valid = self._meeting_creator.send_meeting()
             self._endpoint_status = False
+            return is_success, params_valid
         else:
             self._logger.warning("Meeting not created since Endpoint Closed")
+            return False, True
 
     def close_endpoint(self) -> None:
         """

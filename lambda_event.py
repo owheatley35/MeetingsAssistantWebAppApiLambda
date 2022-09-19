@@ -1,3 +1,6 @@
+from security.exceptions.InvalidHeaderException import InvalidHeaderException
+
+
 class LambdaEvent:
     """
     Class to model the relevant event information of a Lambda function.
@@ -7,9 +10,13 @@ class LambdaEvent:
         :param event: event object from the Lambda function
         """
         self._event = event
-        self._header = event["header"]
-        self._request_path = event["requestContext"]["http"]["path"]
-        self._query_parameters = event["queryStringParameters"]
+
+        if "header" in self._event and "requestContext" in self._event and "queryStringParameters" in self._event:
+            self._header = self._event["header"]
+            self._request_path = self._event["requestContext"]["http"]["path"]
+            self._query_parameters = self._event["queryStringParameters"]
+        else:
+            raise InvalidHeaderException("Invalid Event")
 
     def get_header(self) -> dict:
         """

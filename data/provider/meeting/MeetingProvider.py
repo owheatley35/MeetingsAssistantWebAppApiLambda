@@ -7,7 +7,7 @@ from helper.LoggingHelper import LoggingHelper
 from helper.SQLValidationHelper import validate_meeting_id, validate_user_id
 
 SQL_QUERY = """SELECT MeetingId, MeetingTitle, NumberOfAttendees, MeetingDateTime, MeetingTranscript, MeetingNotes 
-FROM MeetingsAssistantInitial.meetings WHERE UserId = %(user_id)s AND MeetingId = %(meeting_id)s"""
+FROM meetingsassistant.meetings WHERE UserId = %(user_id)s AND MeetingId = %(meeting_id)s"""
 
 
 class MeetingProvider(MeetingDataManipulator):

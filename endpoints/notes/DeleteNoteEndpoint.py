@@ -35,7 +35,7 @@ class DeleteNoteEndpoint:
             self._logger.error("Invalid index")
             self.close_endpoint()
 
-    def delete_note(self) -> None:
+    def delete_note(self) -> bool:
         """
         Complete the deletion of the note.
 
@@ -47,8 +47,10 @@ class DeleteNoteEndpoint:
             note_updater = NoteUpdater(self._user_id, self._meeting_id, new_note)
             note_updater.send_note()
             note_updater.finish()
+            return True
         else:
             self._logger.warning("Endpoint Closed")
+            return False
 
     def close_endpoint(self) -> None:
         """

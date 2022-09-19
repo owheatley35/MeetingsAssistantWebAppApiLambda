@@ -7,7 +7,7 @@ from helper.LoggingHelper import LoggingHelper
 from helper.SQLValidationHelper import validate_user_id, validate_sql_text, validate_sql_longtext
 from helper.StringHelper import convert_list_to_comma_seperated_string
 
-SQL_QUERY = """insert into MeetingsAssistantInitial.meetings (UserId, MeetingDateTime, NumberOfAttendees, MeetingTranscript, MeetingTitle, attendees)
+SQL_QUERY = """insert into meetingsassistant.meetings (UserId, MeetingDateTime, NumberOfAttendees, MeetingTranscript, MeetingTitle, attendees)
 values (%(user_id)s, %(meeting_date_time)s, %(number_of_attendees)s, %(meeting_description)s, %(meeting_title)s, %(attendees)s);"""
 
 
@@ -37,7 +37,7 @@ class MeetingCreator(DatabaseConnector):
         self._attendees = convert_list_to_comma_seperated_string(attendees)
         self._number_of_attendees = len(attendees)
 
-    def send_meeting(self) -> None:
+    def send_meeting(self) -> [bool, bool]:
         """
         Creates a new meeting in the database.
         Only runs if a connection is open and the parameters are valid
@@ -59,10 +59,13 @@ class MeetingCreator(DatabaseConnector):
             })
 
             self._connection_helper.commit_connection()
+
+            return [True, True]
         else:
             self._logger.error("Meeting was not created in database due to one of the following being "
-                               "'flase': \n Connection Open: %s \n Parameters Valid: %s",
+                               "'false': \n Connection Open: %s \n Parameters Valid: %s",
                                str(self._connection_helper.is_connection_open()), str(self._is_params_valid()))
+            return False, self._is_params_valid()
 
     def _is_params_valid(self) -> bool:
         """

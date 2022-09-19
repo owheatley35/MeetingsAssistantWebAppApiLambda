@@ -1,6 +1,9 @@
-mysql-connector-python==8.0.28
-pandas==1.4.1
-PyMySQL==1.0.2
-python-dotenv==0.19.2
+mysql-connector-python==8.0.30
+pandas==1.4.4
+python-dotenv==0.21.0
 python-jose==3.3.0
 six==1.16.0
+mypy
+pytest
+coverage
+mockito

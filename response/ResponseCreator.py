@@ -4,9 +4,9 @@ from response.ResponseType import ResponseType
 
 def form_response(status_code: ResponseStatusCode, content_type: ResponseType, response_body: object) -> object:
     return {
-        "statusCode": status_code,
+        "statusCode": status_code.value,
         "headers": {
-            "Content-Type": content_type
+            "Content-Type": content_type.value
         },
         "body": response_body
     }
@@ -19,3 +19,6 @@ class ResponseCreator:
 
     def generate_successful_response(self):
         return form_response(ResponseStatusCode.SUCCESS, ResponseType.JSON, self._body)
+
+    def generate_failure_response(self):
+        return form_response(ResponseStatusCode.ERROR_INTERNAL, ResponseType.JSON, self._body)

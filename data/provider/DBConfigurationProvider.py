@@ -19,7 +19,7 @@ class DBConfigurationProvider:
             db_credentials = secrets_provider.retrieve_secret(db_credentials_secret_name)
         except Exception as e:
             logger.error(e)
-            sys.exit()
+            raise e
 
         logger.info("Accessing Data...")
         self._host = db_credentials['host']

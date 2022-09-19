@@ -3,7 +3,7 @@ from database.MySQLQueryExecutor import MySQLQueryExecutor
 from helper.LoggingHelper import LoggingHelper
 from helper.SQLValidationHelper import validate_user_id, validate_meeting_id
 
-SQL_QUERY = "DELETE FROM MeetingsAssistantInitial.meetings WHERE MeetingId = %(meeting_id)s AND UserId = %(user_id)s;"
+SQL_QUERY = "DELETE FROM meetingsassistant.meetings WHERE MeetingId = %(meeting_id)s AND UserId = %(user_id)s;"
 
 
 class MeetingDeleter(MeetingDataManipulator):

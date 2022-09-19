@@ -6,7 +6,7 @@ from database.MySQLQueryExecutor import MySQLQueryExecutor
 from helper.LoggingHelper import LoggingHelper
 from helper.SQLValidationHelper import validate_user_id
 
-BASIC_MEETING_QUERY = """SELECT MeetingId, MeetingTitle, NumberOfAttendees, MeetingDateTime FROM MeetingsAssistantInitial.meetings WHERE UserId = %(user_id)s"""
+BASIC_MEETING_QUERY = """SELECT MeetingId, MeetingTitle, NumberOfAttendees, MeetingDateTime FROM meetingsassistant.meetings WHERE UserId = %(user_id)s"""
 
 # datetime format
 f = '%Y-%m-%d %H:%M:%S'

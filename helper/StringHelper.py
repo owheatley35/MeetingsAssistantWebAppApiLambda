@@ -22,7 +22,7 @@ def break_string_into_list(list_string: str) -> List[str]:
 
     temp_list = list_string.split(STRING_SPLITTER)
     del temp_list[0]
-    return temp_list
+    return [item.strip() for item in temp_list]
 
 
 def convert_list_into_string(list_in: List[str]) -> str:
@@ -59,6 +59,7 @@ def convert_str_to_datetime(meeting_date: str, meeting_time: str) -> datetime:
         return datetime(year, month, day, hour, mins, 0, 0)
     except Exception as e:
         logger.error("Failed to convert string to datetime: %s", e)
+        return datetime.now()
 
 
 def convert_list_to_comma_seperated_string(str_list: List[str]) -> str:

@@ -6,7 +6,7 @@ from helper.LoggingHelper import LoggingHelper
 from helper.SQLValidationHelper import validate_user_id, validate_meeting_id, \
     validate_sql_text, validate_sql_longtext
 
-SQL_QUERY = """UPDATE MeetingsAssistantInitial.meetings
+SQL_QUERY = """UPDATE meetingsassistant.meetings
 SET MeetingTitle = %(meeting_title)s, MeetingDateTime = %(meeting_date_time)s, MeetingTranscript = %(meeting_transcript)s 
 WHERE UserId = %(user_id)s AND MeetingId = %(meeting_id)s;"""
 
