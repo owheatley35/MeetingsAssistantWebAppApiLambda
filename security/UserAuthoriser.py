@@ -3,7 +3,7 @@ import json
 from jose import jwt
 
 from data.provider.UserRoleProvider import UserRoleProvider
-from roles.User import User
+from security.roles.User import User
 from security.credentials import auth0_domain, api_audience, algorithms, auth0_key
 from security.exceptions.AuthError import AuthError
 from six.moves.urllib.request import urlopen
