@@ -1,5 +1,3 @@
-import sys
-
 from data.provider.SecretProvider import SecretProvider
 from database.DBConfiguration import DBConfiguration
 from helper.LoggingHelper import LoggingHelper

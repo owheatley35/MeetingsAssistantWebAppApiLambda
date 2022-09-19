@@ -14,7 +14,7 @@ from security.exceptions.AuthError import AuthError
 logger = LoggingHelper("Handler").retrieve_logger()
 
 
-def handle(context, event):
+def handle(event, context):
     logger.info("Handling")
 
     # create_db_beta = """CREATE DATABASE meetingsassistant"""
