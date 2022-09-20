@@ -11,9 +11,9 @@ class LambdaEvent:
         """
         self._event = event
 
-        if "header" in self._event and "requestContext" in self._event and "queryStringParameters" in self._event:
-            self._header = self._event["header"]
-            self._request_path = self._event["requestContext"]["http"]["path"]
+        if "headers" in self._event and "path" in self._event and "queryStringParameters" in self._event:
+            self._header = self._event["headers"]
+            self._request_path = self._event["path"]
             self._query_parameters = self._event["queryStringParameters"]
         else:
             raise InvalidHeaderException("Invalid Event")
@@ -22,7 +22,7 @@ class LambdaEvent:
         """
         :return: dictionary containing the headers of the request
         """
-        return self._header
+        return self._header if self._header else {}
 
     def get_request_path(self) -> str:
         """
@@ -34,4 +34,4 @@ class LambdaEvent:
         """
         :return: dictionary containing the query parameters
         """
-        return self._query_parameters
+        return self._query_parameters if self._query_parameters else {}
