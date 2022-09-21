@@ -1,14 +1,21 @@
+import os
 from unittest import TestCase
 
 from response.ResponseCreator import ResponseCreator
 
-test_response_object = {
-    "message": "hello"
-}
+
+class TestObject:
+
+    def __init__(self):
+        self.message = "hello"
+
+
+test_response_object = TestObject()
 
 
 class TestResponseCreator(TestCase):
     def test_success_response(self):
+        os.environ['stage'] = "BETA"
         testee = ResponseCreator(test_response_object)
         result = testee.generate_successful_response()
 
