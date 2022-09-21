@@ -4,13 +4,15 @@ from unittest import TestCase
 from response.ResponseCreator import ResponseCreator
 
 
-class TestObject:
+# class TestObject:
+#
+#     def __init__(self):
+#         self.message = "hello"
 
-    def __init__(self):
-        self.message = "hello"
 
-
-test_response_object = TestObject()
+test_response_object = {
+    "message": "hello"
+}
 
 
 class TestResponseCreator(TestCase):
