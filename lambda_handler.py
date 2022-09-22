@@ -1,7 +1,7 @@
-# from data.provider.DBConfigurationProvider import DBConfigurationProvider
-# from data.provider.UserRoleProvider import UserRoleProvider
-# from database.DatabaseConnectionHelper import DatabaseConnectionHelper
-# from database.MySQLQueryExecutor import MySQLQueryExecutor
+from data.provider.DBConfigurationProvider import DBConfigurationProvider
+from data.provider.UserRoleProvider import UserRoleProvider
+from database.DatabaseConnectionHelper import DatabaseConnectionHelper
+from database.MySQLQueryExecutor import MySQLQueryExecutor
 from routing.EndpointExecutor import EndpointExecutor
 from security.exceptions.InvalidHeaderException import InvalidHeaderException
 from lambda_event import LambdaEvent
@@ -35,19 +35,19 @@ def handle(event, context):
 
     # select_tables = """SELECT * FROM meetingsassistant.users"""
 
-    # db_connection = DatabaseConnectionHelper()
-    #
-    # db_config = DBConfigurationProvider().get_configuration()
-    # connection_helper = DatabaseConnectionHelper(db_config)
-    #
-    # if connection_helper.is_connection_open():
-    #     query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
-    #     # query_helper.execute_query(create_db_beta)
-    #     # query_helper.execute_query(initial_sql_setup)
-    #     query_helper.execute_query(initial_sql_setup)
-    #
-    # connection_helper.commit_connection()
-    # connection_helper.close_connection()
+    alter_statement = """ALTER TABLE meetingsassistant.meetings
+    ADD MeetingId INT PRIMARY KEY NOT NULL
+    MODIFY COLUMN UserId varchar(255) NOT NULL;"""
+
+    db_config = DBConfigurationProvider().get_configuration()
+    connection_helper = DatabaseConnectionHelper(db_config)
+
+    if connection_helper.is_connection_open():
+        query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+        query_helper.execute_query(alter_statement)
+
+    connection_helper.commit_connection()
+    connection_helper.close_connection()
 
     # TODO: Remove
     logger.info(event)
@@ -69,7 +69,16 @@ def handle(event, context):
     # Route request to desired endpoint
     endpoint_executor = EndpointExecutor(user, lambda_event.get_query_parameters())
     endpoint_router = EndpointRouter(endpoint_executor, lambda_event.get_request_path())
-    return endpoint_router.route_endpoint()
+    response = endpoint_router.route_endpoint()
+
+    if not response or response == {}:
+        logger.error("Invalid Response: " + str(response) + ", replacing with server error")
+        return SetResponses.INTERNAL_ERROR.value
+
+    logger.info("Response: " + str(response))
+    return response
+
+
     #
     # retrieve_rows = UserRoleProvider('624c0fe938bf3900699ac5cc')
     # logger.debug(retrieve_rows.get_user_role())
