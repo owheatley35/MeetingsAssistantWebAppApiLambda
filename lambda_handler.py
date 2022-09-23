@@ -55,7 +55,7 @@ def handle(event, context):
     DROP MeetingId;"""
 
     alter_statement_five = """ALTER TABLE meetingsassistant.meetings
-    ADD MeetingId varchar(255) NOT NULL PRIMARY KEY AUTO_INCREMENT;"""
+    ADD MeetingId INT NOT NULL PRIMARY KEY AUTO_INCREMENT;"""
 
     update_alter_table = """ALTER TABLE meetingsassistant.meetings
     MODIFY MeetingId AUTO_INCREMENT;"""
