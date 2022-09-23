@@ -1,6 +1,6 @@
-from data.provider.DBConfigurationProvider import DBConfigurationProvider
-from database.DatabaseConnectionHelper import DatabaseConnectionHelper
-from database.MySQLQueryExecutor import MySQLQueryExecutor
+# from data.provider.DBConfigurationProvider import DBConfigurationProvider
+# from database.DatabaseConnectionHelper import DatabaseConnectionHelper
+# from database.MySQLQueryExecutor import MySQLQueryExecutor
 from routing.EndpointExecutor import EndpointExecutor
 from security.exceptions.InvalidHeaderException import InvalidHeaderException
 from lambda_event import LambdaEvent
@@ -54,20 +54,20 @@ def handle(event, context):
     # alter_statement_four = """ALTER TABLE meetingsassistant.meetings
     # DROP MeetingId;"""
     #
-    alter_statement_five = """ALTER TABLE meetingsassistant.meetings
-    ADD MeetingTranscript LONGTEXT;"""
+    # alter_statement_five = """ALTER TABLE meetingsassistant.meetings
+    # ADD MeetingTranscript LONGTEXT;"""
     #
     # update_alter_table = """ALTER TABLE meetingsassistant.meetings
     # MODIFY MeetingId AUTO_INCREMENT;"""
     #
-    db_config = DBConfigurationProvider().get_configuration()
-    connection_helper = DatabaseConnectionHelper(db_config)
-
-    if connection_helper.is_connection_open():
-        query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
-
-        if "doit" in event:
-            query_helper.execute_query(alter_statement_five)
+    # db_config = DBConfigurationProvider().get_configuration()
+    # connection_helper = DatabaseConnectionHelper(db_config)
+    #
+    # if connection_helper.is_connection_open():
+    #     query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+    #
+    #     if "doit" in event:
+    #         query_helper.execute_query(alter_statement_five)
     #     # query_helper.execute_query(alter_statement)
     #     # query_helper.execute_query(alter_statement_two)
     #
@@ -106,8 +106,8 @@ def handle(event, context):
     #     if "increment_change" in event:
     #         query_helper.execute_query(update_alter_table)
     #
-    connection_helper.commit_connection()
-    connection_helper.close_connection()
+    # connection_helper.commit_connection()
+    # connection_helper.close_connection()
 
     # TODO: Remove
     logger.info(event)
@@ -117,7 +117,9 @@ def handle(event, context):
         lambda_event = LambdaEvent(event)
     except InvalidHeaderException as e:
         logger.error("Invalid event: " + str(e))
-        return SetResponses.INVALID_REQUEST.value
+        response = SetResponses.INVALID_REQUEST.value
+        logger.info("Response: " + str(response) + "type:" + str(type(response)))
+        return response
 
     # Authenticate User
     try:
