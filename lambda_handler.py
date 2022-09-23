@@ -132,5 +132,5 @@ def handle(event, context):
         logger.error("Invalid Response: " + str(response) + ", replacing with server error")
         return SetResponses.INTERNAL_ERROR.value
 
-    logger.info("Response: " + str(response))
+    logger.info("Response: " + str(response) + "type:" + type(response))
     return response
