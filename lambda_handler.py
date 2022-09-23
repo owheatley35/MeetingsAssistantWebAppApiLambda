@@ -52,10 +52,10 @@ def handle(event, context):
         ALTER COLUMN UserId varchar(255) NOT NULL;"""
 
     alter_statement_four = """ALTER TABLE meetingsassistant.meetings
-    DROP UserId;"""
+    DROP MeetingId;"""
 
     alter_statement_five = """ALTER TABLE meetingsassistant.meetings
-    ADD UserId varchar(255) NOT NULL;"""
+    ADD MeetingId varchar(255) NOT NULL PRIMARY KEY AUTO_INCREMENT;"""
 
     update_alter_table = """ALTER TABLE meetingsassistant.meetings
     MODIFY MeetingId AUTO_INCREMENT;"""
@@ -97,7 +97,7 @@ def handle(event, context):
         if "alter_one" in event:
             query_helper.execute_query(alter_statement_four)
 
-        if "alter_three" in event:
+        if "alter_two" in event:
             query_helper.execute_query(alter_statement_five)
 
         if "increment_change" in event:
