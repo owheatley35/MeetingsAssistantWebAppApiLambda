@@ -1,3 +1,5 @@
+import json
+
 from security.exceptions.InvalidHeaderException import InvalidHeaderException
 
 
@@ -15,6 +17,7 @@ class LambdaEvent:
             self._header = self._event["headers"]
             self._request_path = self._event["path"]
             self._query_parameters = self._event["queryStringParameters"]
+            self._body = self._event["body"] if "body" in self._event else {}
         else:
             raise InvalidHeaderException("Invalid Event")
 
@@ -37,4 +40,4 @@ class LambdaEvent:
         return self._query_parameters if self._query_parameters else {}
 
     def get_body(self) -> dict:
-        return self._event["body"] if "body" in self._event else {}
+        return self._body if isinstance(self._body, dict) else json.loads(self._body).__dict__
