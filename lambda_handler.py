@@ -29,8 +29,7 @@ def handle(event, context):
 
     create_users_table = """CREATE TABLE meetingsassistant.users (
     UserId varchar(255) NOT NULL PRIMARY KEY,
-    RoleName varchar(255) NOT NULL;
-    )"""
+    RoleName varchar(255) NOT NULL);"""
 
     update_with_personal_user = """INSERT into meetingsassistant.users (UserId, RoleName)
     VALUES ('621694e858c5f70069b7cb06', 'role:admin');"""
