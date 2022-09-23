@@ -53,7 +53,10 @@ def handle(event, context):
         ALTER COLUMN UserId varchar(255) NOT NULL;"""
 
     alter_statement_four = """ALTER TABLE meetingsassistant.meetings
-    drop primary key, add primary key MeetingId"""
+    DROP UserId;"""
+
+    alter_statement_five = """ALTER TABLE meetingsassistant.meetings
+    ADD UserId varchar(255) NOT NULL;"""
 
     db_config = DBConfigurationProvider().get_configuration()
     connection_helper = DatabaseConnectionHelper(db_config)
@@ -89,8 +92,11 @@ def handle(event, context):
         if "alter_userid_two" in event:
             query_helper.execute_query(alter_statement_three)
 
-        if "alter_meetingid_two" in event:
+        if "alter_one" in event:
             query_helper.execute_query(alter_statement_four)
+
+        if "alter_three" in event:
+            query_helper.execute_query(alter_statement_five)
 
     connection_helper.commit_connection()
     connection_helper.close_connection()
