@@ -58,7 +58,7 @@ def handle(event, context):
     ADD UserId varchar(255) NOT NULL;"""
 
     update_alter_table = """ALTER TABLE meetingsassistant.meetings
-    MODIFY MeetingId AUTO_INCREMENT"""
+    MODIFY MeetingId AUTO_INCREMENT;"""
 
     db_config = DBConfigurationProvider().get_configuration()
     connection_helper = DatabaseConnectionHelper(db_config)
