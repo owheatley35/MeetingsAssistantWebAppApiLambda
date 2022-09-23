@@ -19,13 +19,14 @@ class EndpointExecutor:
     """
     Provides execution for endpoints and configures their variables.
     """
-    def __init__(self, user: User, args, logger=LoggingHelper(__name__).retrieve_logger()):
+    def __init__(self, user: User, args: dict, logger=LoggingHelper(__name__).retrieve_logger()):
         """
         Open an instance of the EndpointExecutor class and set the user id and args.
 
         :param user: User object containing information about the user
         :param args: dictionary of arguments provided by the request
         """
+        logger.info(args)
         self._args = args
         self._logger = logger
         self._user: User = user
@@ -93,7 +94,7 @@ class EndpointExecutor:
         Executes the CreateMeetingEndpoint and returns the result.
         """
         self._logger.info("Executing: 'Create Meeting'")
-        meeting_name = self._args["meeting_name"]
+        meeting_name = self._args["meeting_title"]
         meeting_description = self._args["meeting_description"]
         meeting_date = self._args["meeting_date"]
         meeting_time = self._args["meeting_time"]
@@ -130,7 +131,7 @@ class EndpointExecutor:
         """
         self._logger.info("Executing: 'Update Meeting Details'")
         meeting_id = self._args["meeting_id"]
-        meeting_name = self._args["meeting_name"]
+        meeting_name = self._args["meeting_title"]
         meeting_description = self._args["meeting_description"]
         meeting_date = self._args["meeting_date"]
         endpoint = EditMeetingEndpoint(self._user.get_id(), meeting_id, meeting_name, meeting_description, meeting_date)

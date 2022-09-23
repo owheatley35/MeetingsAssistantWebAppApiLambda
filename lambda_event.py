@@ -35,3 +35,6 @@ class LambdaEvent:
         :return: dictionary containing the query parameters
         """
         return self._query_parameters if self._query_parameters else {}
+
+    def get_body(self) -> dict:
+        return self._event["body"] if "body" in self._event else {}
