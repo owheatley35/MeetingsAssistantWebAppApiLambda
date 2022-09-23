@@ -19,7 +19,7 @@ def handle(event, context):
     # create_db_beta = """CREATE DATABASE meetingsassistant"""
     #
     # initial_sql_setup = """CREATE TABLE meetingsassistant.meetings (
-    # MeetingId INT PRIMARY KEY NOT NULL,
+    # MeetingId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     # UserId varchar(255) NOT NULL,
     # MeetingDateTime DATETIME NOT NULL,
     # NumberOfAttendees INT NOT NULL,
@@ -54,17 +54,20 @@ def handle(event, context):
     # alter_statement_four = """ALTER TABLE meetingsassistant.meetings
     # DROP MeetingId;"""
     #
-    # alter_statement_five = """ALTER TABLE meetingsassistant.meetings
-    # ADD MeetingId INT NOT NULL PRIMARY KEY AUTO_INCREMENT;"""
+    alter_statement_five = """ALTER TABLE meetingsassistant.meetings
+    ADD MeetingTranscript LONGTEXT;"""
     #
     # update_alter_table = """ALTER TABLE meetingsassistant.meetings
     # MODIFY MeetingId AUTO_INCREMENT;"""
     #
-    # db_config = DBConfigurationProvider().get_configuration()
-    # connection_helper = DatabaseConnectionHelper(db_config)
-    #
-    # if connection_helper.is_connection_open():
-    #     query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+    db_config = DBConfigurationProvider().get_configuration()
+    connection_helper = DatabaseConnectionHelper(db_config)
+
+    if connection_helper.is_connection_open():
+        query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+
+        if "doit" in event:
+            query_helper.execute_query(alter_statement_five)
     #     # query_helper.execute_query(alter_statement)
     #     # query_helper.execute_query(alter_statement_two)
     #
@@ -103,8 +106,8 @@ def handle(event, context):
     #     if "increment_change" in event:
     #         query_helper.execute_query(update_alter_table)
     #
-    # connection_helper.commit_connection()
-    # connection_helper.close_connection()
+    connection_helper.commit_connection()
+    connection_helper.close_connection()
 
     # TODO: Remove
     logger.info(event)
@@ -132,5 +135,5 @@ def handle(event, context):
         logger.error("Invalid Response: " + str(response) + ", replacing with server error")
         return SetResponses.INTERNAL_ERROR.value
 
-    logger.info("Response: " + str(response) + "type:" + type(response))
+    logger.info("Response: " + str(response) + "type:" + str(type(response)))
     return response
