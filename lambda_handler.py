@@ -20,7 +20,7 @@ def handle(event, context):
 
     initial_sql_setup = """CREATE TABLE meetingsassistant.meetings (
     MeetingId INT PRIMARY KEY NOT NULL,
-    UserId varchar(255) PRIMARY KEY NOT NULL,
+    UserId varchar(255) NOT NULL,
     MeetingDateTime DATETIME NOT NULL,
     NumberOfAttendees INT NOT NULL,
     MeetingNotes LONGTEXT,
@@ -51,6 +51,9 @@ def handle(event, context):
 
     alter_statement_three = """ALTER TABLE meetingsassistant.meetings
         ALTER COLUMN UserId varchar(255) NOT NULL;"""
+
+    alter_statement_four = """ALTER TABLE meetingsassistant.meetings
+    drop primary key, add primary key MeetingId"""
 
     db_config = DBConfigurationProvider().get_configuration()
     connection_helper = DatabaseConnectionHelper(db_config)
@@ -85,6 +88,9 @@ def handle(event, context):
 
         if "alter_userid_two" in event:
             query_helper.execute_query(alter_statement_three)
+
+        if "alter_meetingid_two" in event:
+            query_helper.execute_query(alter_statement_four)
 
     connection_helper.commit_connection()
     connection_helper.close_connection()
