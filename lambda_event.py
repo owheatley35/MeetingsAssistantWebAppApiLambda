@@ -40,4 +40,7 @@ class LambdaEvent:
         return self._query_parameters if self._query_parameters else {}
 
     def get_body(self) -> dict:
-        return self._body if isinstance(self._body, dict) else json.loads(self._body).__dict__
+        if isinstance(self._body, dict):
+            return self._body
+        else:
+            return json.loads(self._body)
