@@ -17,7 +17,7 @@ class LambdaEvent:
             self._header = self._event["headers"]
             self._request_path = self._event["path"]
             self._query_parameters = self._event["queryStringParameters"]
-            self._body = self._event["body"] if "body" in self._event else {}
+            self._body = self._event["body"] if "body" in self._event else "{}"
         else:
             raise InvalidHeaderException("Invalid Event")
 
@@ -40,7 +40,4 @@ class LambdaEvent:
         return self._query_parameters if self._query_parameters else {}
 
     def get_body(self) -> dict:
-        if isinstance(self._body, dict):
-            return self._body
-        else:
-            return json.loads(self._body)
+        return json.loads(self._body)
