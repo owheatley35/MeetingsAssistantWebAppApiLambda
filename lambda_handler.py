@@ -1,6 +1,8 @@
 # from data.provider.DBConfigurationProvider import DBConfigurationProvider
 # from database.DatabaseConnectionHelper import DatabaseConnectionHelper
 # from database.MySQLQueryExecutor import MySQLQueryExecutor
+import json
+
 from routing.EndpointExecutor import EndpointExecutor
 from security.exceptions.InvalidHeaderException import InvalidHeaderException
 from lambda_event import LambdaEvent
@@ -138,4 +140,4 @@ def handle(event, context):
         return SetResponses.INTERNAL_ERROR.value
 
     logger.info("Response: " + str(response) + "type:" + str(type(response)))
-    return response
+    return response if isinstance(response, str) else json.dumps(response)
