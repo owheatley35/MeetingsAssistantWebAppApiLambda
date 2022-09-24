@@ -12,7 +12,8 @@ role_configuration = {
         RolePermission.MEETING_CREATE.value,
         RolePermission.MEETING_DELETE.value,
         RolePermission.MEETING_RETRIEVE.value,
-        RolePermission.MEETING_UPDATE.value
+        RolePermission.MEETING_UPDATE.value,
+        RolePermission.GET_USER_ROLE.value
     },
     RoleType.STANDARD: {
         RolePermission.NOTE_CREATE.value,
@@ -20,7 +21,8 @@ role_configuration = {
         RolePermission.NOTE_RETRIEVE.value,
         RolePermission.MEETING_CREATE.value,
         RolePermission.MEETING_RETRIEVE.value,
-        RolePermission.MEETING_UPDATE.value
+        RolePermission.MEETING_UPDATE.value,
+        RolePermission.GET_USER_ROLE.value
     }
 }
 
@@ -49,5 +51,8 @@ route_security_configuration = {
     },
     FormattedRoutes.UpdateMeetingDetails.value: {
         RolePermission.MEETING_UPDATE
+    },
+    FormattedRoutes.GetUserRole.value: {
+        RolePermission.GET_USER_ROLE
     }
 }

@@ -5,6 +5,9 @@ class RolePermission(Enum):
     """
     Permission Types for an action a user can perform.
     """
+    # General
+    GET_USER_ROLE = "retrieve:role"
+
     # Meeting Permissions
     MEETING_CREATE = "create:meeting"
     MEETING_UPDATE = "update:meeting"
