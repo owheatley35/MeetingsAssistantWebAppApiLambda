@@ -1,3 +1,4 @@
+import json
 import os
 
 from Constants import ALLOWED_ORIGINS
@@ -16,9 +17,9 @@ def form_response(status_code: ResponseStatusCode, content_type: ResponseType, r
             "Content-Type": content_type.value,
             "Access-Control-Allow-Headers": "*",
             "Access-Control-Allow-Methods": "*",
-            "Access-Control-Allow-Origin": origin
+            "Access-Control-Allow-Origin": origin,
         },
-        "body": response_body
+        "body": json.dumps(response_body)
     }
 
 
