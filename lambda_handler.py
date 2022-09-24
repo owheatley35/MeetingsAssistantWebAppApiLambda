@@ -1,6 +1,6 @@
-from data.provider.DBConfigurationProvider import DBConfigurationProvider
-from database.DatabaseConnectionHelper import DatabaseConnectionHelper
-from database.MySQLQueryExecutor import MySQLQueryExecutor
+# from data.provider.DBConfigurationProvider import DBConfigurationProvider
+# from database.DatabaseConnectionHelper import DatabaseConnectionHelper
+# from database.MySQLQueryExecutor import MySQLQueryExecutor
 from routing.EndpointExecutor import EndpointExecutor
 from security.exceptions.InvalidHeaderException import InvalidHeaderException
 from lambda_event import LambdaEvent
@@ -31,14 +31,14 @@ def handle(event, context):
     # UserId varchar(255) NOT NULL PRIMARY KEY,
     # RoleName varchar(255) NOT NULL);"""
     #
-    update_with_personal_user = """INSERT into meetingsassistant.users (UserId, RoleName)
-    VALUES ('621694e858c5f70069b7cb06', 'role:admin');"""
-
-    update_with_inital_user = """INSERT into meetingsassistant.users (UserId, RoleName)
-    VALUES ('624c0fe938bf3900699ac5cc', 'role:admin');"""
-
-    update_with_user = """INSERT into meetingsassistant.users (UserId, RoleName)
-        VALUES ('624c117bb407b20069e31c01', 'role:standard');"""
+    # update_with_personal_user = """INSERT into meetingsassistant.users (UserId, RoleName)
+    # VALUES ('621694e858c5f70069b7cb06', 'role:admin');"""
+    #
+    # update_with_inital_user = """INSERT into meetingsassistant.users (UserId, RoleName)
+    # VALUES ('624c0fe938bf3900699ac5cc', 'role:admin');"""
+    #
+    # update_with_user = """INSERT into meetingsassistant.users (UserId, RoleName)
+    #     VALUES ('624c117bb407b20069e31c01', 'role:standard');"""
     #
     # # select_tables = """SELECT * FROM meetingsassistant.users"""
     #
@@ -60,11 +60,11 @@ def handle(event, context):
     # update_alter_table = """ALTER TABLE meetingsassistant.meetings
     # MODIFY MeetingId AUTO_INCREMENT;"""
     #
-    db_config = DBConfigurationProvider().get_configuration()
-    connection_helper = DatabaseConnectionHelper(db_config)
-
-    if connection_helper.is_connection_open():
-        query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
+    # db_config = DBConfigurationProvider().get_configuration()
+    # connection_helper = DatabaseConnectionHelper(db_config)
+    #
+    # if connection_helper.is_connection_open():
+    #     query_helper = MySQLQueryExecutor(connection_helper.get_connection_cursor())
     #
     #     if "doit" in event:
     #         query_helper.execute_query(alter_statement_five)
@@ -80,13 +80,13 @@ def handle(event, context):
     #     if "create_users_table" in event:
     #         query_helper.execute_query(create_users_table)
     #
-        if "create_users" in event:
-            if "my_admin" in event["create_users"]:
-                query_helper.execute_query(update_with_personal_user)
-            if "admin" in event["create_event"]:
-                query_helper.execute_query(update_with_inital_user)
-            if "standard" in event["create_event"]:
-                query_helper.execute_query(update_with_user)
+        # if "create_users" in event:
+        #     if "my_admin" in event["create_users"]:
+        #         query_helper.execute_query(update_with_personal_user)
+        #     if "admin" in event["create_event"]:
+        #         query_helper.execute_query(update_with_inital_user)
+        #     if "standard" in event["create_event"]:
+        #         query_helper.execute_query(update_with_user)
     #
     #     if "alter_meetingid" in event:
     #         query_helper.execute_query(alter_statement)
@@ -106,8 +106,8 @@ def handle(event, context):
     #     if "increment_change" in event:
     #         query_helper.execute_query(update_alter_table)
     #
-    connection_helper.commit_connection()
-    connection_helper.close_connection()
+    # connection_helper.commit_connection()
+    # connection_helper.close_connection()
 
     # TODO: Remove
     logger.info(event)
