@@ -41,11 +41,12 @@ class EndpointExecutor:
         threading.Thread(target=endpoint.close_endpoint).start()
         return self._generate_response(endpoint_result, True)
 
-    def execute_get_meeting_from_id(self, meeting_id: str):
+    def execute_get_meeting_from_id(self):
         """
         Executes the GetMeetingEndpoint and returns the result.
         """
         self._logger.info("Executing: 'Get Meeting From ID'")
+        meeting_id = self._args["meeting_id"]
         endpoint = GetMeetingEndpoint(self._user.get_id(), meeting_id)
         endpoint_result = endpoint.get_endpoint_result()
         threading.Thread(target=endpoint.close_endpoint).start()
