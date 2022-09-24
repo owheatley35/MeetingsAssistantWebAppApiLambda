@@ -6,16 +6,17 @@ from response.SetResponses import SetResponses
 from security.roles.RoleConfiguration import route_security_configuration
 from routing.formatted_routes import FormattedRoutes
 
-
 MEETING_PATTERN = re.compile('^(meeting-[0-9]*)$')
 MEETING_ID_PATTERN = re.compile('^meeting-([0-9]*)$')
+
 
 class EndpointRouter:
     """
     Routes request to the correct endpoint.
     """
 
-    def __init__(self, endpoint_executor: EndpointExecutor, path: str, logger=LoggingHelper(__name__).retrieve_logger()):
+    def __init__(self, endpoint_executor: EndpointExecutor, path: str,
+                 logger=LoggingHelper(__name__).retrieve_logger()):
         """
         Open an instance of the EndpointRouter class and set the user id, path, and query parameters.
 
@@ -33,8 +34,13 @@ class EndpointRouter:
 
         :return: Response from the endpoint formatted to be sent to the client
         """
+        temp_formatted_route = ""
         formatted_route = self._format_route()
         self._logger.info("Formatted Route: " + formatted_route)
+
+        if MEETING_PATTERN.match(formatted_route):
+            temp_formatted_route = formatted_route
+            formatted_route = FormattedRoutes.GetMeetingFromId.value
 
         # Check route is valid
         if formatted_route not in [member.value for member in FormattedRoutes]:
@@ -48,8 +54,9 @@ class EndpointRouter:
         # Route to correct endpoint - no switch statement in python :(
         if formatted_route == FormattedRoutes.GetAllMeetings.value:
             return self._endpoint_executor.execute_get_all_meetings()
-        elif MEETING_PATTERN.match(formatted_route):
-            return self._endpoint_executor.execute_get_meeting_from_id(re.search(MEETING_ID_PATTERN, formatted_route).group(1))
+        elif formatted_route == FormattedRoutes.GetMeetingFromId.value:
+            return self._endpoint_executor.execute_get_meeting_from_id(
+                re.search(MEETING_ID_PATTERN, temp_formatted_route).group(1))
         elif formatted_route == FormattedRoutes.UpdateMeetingNote.value:
             return self._endpoint_executor.execute_update_meeting_note()
         elif formatted_route == FormattedRoutes.CreateMeetingNote.value:
