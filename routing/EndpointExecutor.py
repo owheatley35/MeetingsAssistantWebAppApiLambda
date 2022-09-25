@@ -123,7 +123,7 @@ class EndpointExecutor:
         endpoint = UserRoleEndpoint(self._user.get_id())
         endpoint_result = endpoint.get_user_role()
         endpoint.close_endpoint()
-        return endpoint_result.get_formatted_response()
+        return ResponseCreator(endpoint_result.get_formatted_response()).generate_successful_response()
 
     def execute_update_meeting_details(self):
         """
