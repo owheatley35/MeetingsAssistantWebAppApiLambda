@@ -40,7 +40,7 @@ class EndpointRouter:
 
         # Check user is authorised - only continue if true
         if not self._user.is_authorised(route_security_configuration.get(formatted_route)):
-            self._logger.error("User not authorised to access {} endpoint.".format(FormattedRoutes.GetAllMeetings))
+            self._logger.error("User not authorised to access {} endpoint.".format(formatted_route))
             return SetResponses.UNAUTHORIZED.value
 
         # Route to correct endpoint - no switch statement in python :(
