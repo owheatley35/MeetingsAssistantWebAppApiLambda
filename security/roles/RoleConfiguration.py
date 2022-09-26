@@ -2,7 +2,7 @@ from routing.formatted_routes import FormattedRoutes
 from security.roles.RolePermission import RolePermission
 from security.roles.RoleType import RoleType
 
-# Define the permissions of each role type.
+# Define the permissions of each role type. Follows principle of the least privilege.
 role_configuration = {
     RoleType.ADMIN: {
         RolePermission.NOTE_CREATE.value,
